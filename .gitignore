@@ -7,3 +7,7 @@ target/
 # IntelliJ
 .idea/
 *.iml
+
+# Other files and folders
+*.txt
+local/

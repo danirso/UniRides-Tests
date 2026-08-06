@@ -7,7 +7,15 @@
 app.path=/home/danirso/Documents/Faculdade/TCC/tcc_caronas_frontend/build/app/outputs/flutter-apk/app-debug.apk
 
 # Device/emulator name, as shown by "adb devices"
-device.name=emulator-5554
+device.name=
 
 # Appium Server URL
-appium.server.url=http://127.0.0.1:4723
+appium.server.url=
+
+# Passenger account (can_drive = false) — used for search/request ride flows
+test.passenger.email=your-passenger-test-account@allowed-domain.com
+test.passenger.password=your-test-password
+
+# Driver account (can_drive = true) — used for offer/accept/complete ride flows
+test.driver.email=your-driver-test-account@allowed-domain.com
+test.driver.password=your-test-password

@@ -13,26 +13,15 @@
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <!-- versões centralizadas, facilita atualizar depois -->
-        <appium.java-client.version>9.4.0</appium.java-client.version>
-        <selenium.version>4.27.0</selenium.version>
+        <appium.java-client.version>10.1.1</appium.java-client.version>
         <junit.jupiter.version>5.11.4</junit.jupiter.version>
     </properties>
 
     <dependencies>
-        <!-- Cliente Java oficial do Appium — fala WebDriver Protocol com o Appium Server -->
         <dependency>
             <groupId>io.appium</groupId>
             <artifactId>java-client</artifactId>
             <version>${appium.java-client.version}</version>
-        </dependency>
-
-        <!-- Selenium vem como dependência transitiva do java-client, mas fixamos a versão
-             explicitamente pra evitar conflito de versão (prática comum em projetos Appium) -->
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>${selenium.version}</version>
         </dependency>
 
         <!-- JUnit 5 (Jupiter) -->

@@ -15,10 +15,11 @@ import java.util.Properties;
 public class BaseTest {
 
     protected AndroidDriver driver;
+    protected Properties config;
 
     @BeforeEach
     public void setUp() throws MalformedURLException {
-        Properties config = loadConfig();
+        config = loadConfig();
 
         String appPath = config.getProperty("app.path");
         String deviceName = config.getProperty("device.name", "emulator-5554");
@@ -47,22 +48,15 @@ public class BaseTest {
         }
     }
 
-    /**
-     * Loads config.properties from the project root, if present.
-     * Environment variables (APP_PATH, DEVICE_NAME, APPIUM_SERVER_URL) take priority
-     * over the file — useful for CI, where config.properties is not committed.
-     */
     private Properties loadConfig() {
         Properties props = new Properties();
 
         try (FileInputStream input = new FileInputStream("config.properties")) {
             props.load(input);
         } catch (IOException e) {
-            // File doesn't exist locally — that's fine, we fall back to env vars.
             System.out.println("config.properties not found, falling back to environment variables.");
         }
 
-        // Env vars override the file, if set
         overrideIfPresent(props, "app.path", "APP_PATH");
         overrideIfPresent(props, "device.name", "DEVICE_NAME");
         overrideIfPresent(props, "appium.server.url", "APPIUM_SERVER_URL");
