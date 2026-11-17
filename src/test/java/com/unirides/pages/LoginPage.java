@@ -2,6 +2,7 @@ package com.unirides.pages;
 
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -29,13 +30,13 @@ public class LoginPage {
     }
 
     private WebElement passwordInput() {
-        return driver.findElement(AppiumBy.androidUIAutomator(
-                "new UiSelector().resourceId(\"" + PASSWORD_INPUT_ID + "\")"));
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(
+                AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"" + PASSWORD_INPUT_ID + "\")")));
     }
 
     private WebElement submitButton() {
-        return driver.findElement(AppiumBy.androidUIAutomator(
-                "new UiSelector().resourceId(\"" + SUBMIT_BUTTON_ID + "\")"));
+        return wait.until(ExpectedConditions.elementToBeClickable(
+                AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"" + SUBMIT_BUTTON_ID + "\")")));
     }
 
     public void enterEmail(String email) {
@@ -58,10 +59,20 @@ public class LoginPage {
         tapSubmit();
     }
 
+    public boolean isErrorDisplayed(String message) {
+        try {
+            return wait.until(ExpectedConditions.visibilityOfElementLocated(
+                    AppiumBy.accessibilityId(message)
+            )).isDisplayed();
+        } catch (TimeoutException e) {
+            return false;
+        }
+    }
+
     public boolean isDisplayed() {
         try {
             return emailInput().isDisplayed();
-        } catch (Exception e) {
+        } catch (TimeoutException e) {
             return false;
         }
     }

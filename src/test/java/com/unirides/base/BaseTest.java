@@ -36,7 +36,8 @@ public class BaseTest {
                 .setDeviceName(deviceName)
                 .setApp(appPath)
                 .setAutomationName("UiAutomator2")
-                .setNewCommandTimeout(Duration.ofSeconds(120));
+                .setNewCommandTimeout(Duration.ofSeconds(120))
+                .setEnforceAppInstall(true);
 
         driver = new AndroidDriver(new URL(serverUrl), options);
     }
